@@ -1,8 +1,9 @@
-import { createRouter as createTanStackRouter } from "@tanstack/react-router";
-import { QueryClient } from "@tanstack/react-query";
-import { routerWithQueryClient } from "@tanstack/react-router-with-query";
+import { ConvexAuthProvider } from "@convex-dev/auth/react";
 import { ConvexQueryClient } from "@convex-dev/react-query";
-import { ConvexProvider } from "convex/react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { createRouter as createTanStackRouter } from "@tanstack/react-router";
+import { routerWithQueryClient } from "@tanstack/react-router-with-query";
+import { ConvexProvider, ConvexReactClient } from "convex/react";
 import { routeTree } from "./routeTree.gen";
 
 export function createRouter() {
@@ -11,6 +12,7 @@ export function createRouter() {
     console.error("missing envar CONVEX_URL");
   }
   const convexQueryClient = new ConvexQueryClient(CONVEX_URL);
+  const convex = new ConvexReactClient(CONVEX_URL);
 
   const queryClient: QueryClient = new QueryClient({
     defaultOptions: {
@@ -29,7 +31,11 @@ export function createRouter() {
       context: { queryClient },
       Wrap: ({ children }) => (
         <ConvexProvider client={convexQueryClient.convexClient}>
-          {children}
+          <QueryClientProvider client={queryClient}>
+            <ConvexAuthProvider client={convex}>
+              {children}
+            </ConvexAuthProvider>
+          </QueryClientProvider>
         </ConvexProvider>
       ),
     }),
