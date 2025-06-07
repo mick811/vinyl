@@ -1,9 +1,9 @@
-import { QueryClient } from "@tanstack/react-query";
-import { createRootRouteWithContext, Outlet, ScrollRestoration } from "@tanstack/react-router";
-import { Meta, Scripts } from "@tanstack/start";
-import * as React from "react";
-import "../styles/app.css";
-import { seo } from "../utils/seo";
+import { QueryClient } from '@tanstack/react-query';
+import { createRootRouteWithContext, Outlet, ScrollRestoration } from '@tanstack/react-router';
+import { Meta, Scripts } from '@tanstack/start';
+import * as React from 'react';
+import '../styles/app.css';
+import { seo } from '../utils/seo';
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
@@ -11,19 +11,19 @@ export const Route = createRootRouteWithContext<{
   head: () => ({
     meta: [
       ...seo({
-        title: "Vinyl Webshop",
-        description: "A fast, simple indie webshop for buying vinyl records",
+        title: 'Vinyl Webshop',
+        description: 'A fast, simple indie webshop for buying vinyl records',
       }),
       {
-        charSet: "utf-8",
+        charSet: 'utf-8',
       },
       {
-        name: "viewport",
-        content: "width=device-width, initial-scale=1",
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1',
       },
     ],
     links: [
-      { rel: "icon", href: "/favicon.ico" },
+      { rel: 'icon', href: '/favicon.ico' },
     ],
   }),
   notFoundComponent: () => <div>Route not found</div>,
@@ -38,7 +38,11 @@ function RootComponent() {
   );
 }
 
-function RootDocument({ children }: { children: React.ReactNode }) {
+function RootDocument({ 
+  children
+}: { 
+  children: React.ReactNode 
+}) {
   return (
     <html>
       <head>

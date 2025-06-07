@@ -1,6 +1,6 @@
-import { defineSchema, defineTable } from "convex/server";
-import { v } from "convex/values";
-import { authTables } from "@convex-dev/auth/server";
+import { authTables } from '@convex-dev/auth/server';
+import { defineSchema, defineTable } from 'convex/server';
+import { v } from 'convex/values';
 
 export default defineSchema({
   ...authTables,
@@ -13,5 +13,5 @@ export default defineSchema({
     phoneVerificationTime: v.optional(v.number()),
     isAnonymous: v.optional(v.boolean()),
     isAdmin: v.optional(v.boolean()),
-  }).index("email", ["email"]),
+  }).index('email', ['email']),
 });
